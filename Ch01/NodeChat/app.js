@@ -13,6 +13,7 @@ app.get('/login',routes.login);
 app.post('/login',routes.loginProcess);
 app.get('/chat',routes.chat);
 
+app.use(errorHandlers.error);
 app.use(errorHandlers.notFound);
 
 app.listen(3000);
