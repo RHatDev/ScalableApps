@@ -13,6 +13,10 @@ app.get('/login',routes.login);
 app.post('/login',routes.loginProcess);
 app.get('/chat',routes.chat);
 
+app.get('/error', function(req, res, next){
+  next(new Error('A contrived error'));
+});
+
 app.use(errorHandlers.error);
 app.use(errorHandlers.notFound);
 
