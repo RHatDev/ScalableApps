@@ -13,7 +13,7 @@ app.set('view options', {defaultLayout: 'layout'});
 app.use(partials());
 app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
-app.user(cookieParser());
+app.use(cookieParser());
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
