@@ -16,7 +16,7 @@ app.use(partials());
 app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
 app.use(cookieParser());
-app.use(session({secret: 'secret'}));
+app.use(session());
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
