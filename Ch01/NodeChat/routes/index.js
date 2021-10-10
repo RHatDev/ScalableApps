@@ -4,7 +4,7 @@ module.exports.loginProcess = loginProcess;
 module.exports.chat = chat;
 
 function index(req,res){
-  res.render('index',{title: 'Index'});
+  res.render('index',{title: 'Index', cookie: JSON.stringify(req.cookies)});
 };
 
 function login(req,res){
