@@ -4,6 +4,8 @@ var routes = require('./routes');
 var errorHandlers = require('./middleware/errorhandlers');
 var log = require('./middleware/log');
 var partials = require('express-partials');
+var cookieParser = require('cookie-parser');
+
 
 app.set('view engine', 'ejs');
 app.set('view options', {defaultLayout: 'layout'});
@@ -11,7 +13,7 @@ app.set('view options', {defaultLayout: 'layout'});
 app.use(partials());
 app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
-
+app.user(cookieParser());
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
