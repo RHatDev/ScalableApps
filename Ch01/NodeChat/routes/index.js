@@ -4,6 +4,7 @@ module.exports.loginProcess = loginProcess;
 module.exports.chat = chat;
 
 function index(req,res){
+  res.cookie('IndexCookie','This is set from Index');
   res.render('index',{title: 'Index', cookie: JSON.stringify(req.cookies)});
 };
 
