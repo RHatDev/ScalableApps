@@ -18,6 +18,14 @@ app.use(express.static(__dirname + '/static'));
 app.use(cookieParser());
 app.use(session({secret:"secret"}));
 
+app.use(function(req,res,next){
+  if(req.session.pageCount)
+    req.session.pageCount++;
+  else
+    req.session.pageCount = 1;
+  next();
+});
+
 app.get('/',routes.index);
 app.get('/login',routes.login);
 app.post('/login',routes.loginProcess);
