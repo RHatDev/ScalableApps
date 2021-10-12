@@ -39,7 +39,7 @@ app.use(session({
   saveUninitialized: true,
   resave: true,
   store: new RedisStore({ client: redisClient })
-});
+  }));
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
