@@ -13,7 +13,8 @@ var RedisStore = require('connect-redis')(session);
 const redisClient = redis.createClient({
     host: 'redis',
     port: 6379,
-    pass: process.env.REDIS_PASSWORD
+    no_ready_check: true,
+    auth_pass: process.env.REDIS_PASSWORD
 });
 
 redisClient.on('error', function (err) {
