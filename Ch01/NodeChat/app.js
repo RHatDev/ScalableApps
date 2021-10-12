@@ -6,7 +6,7 @@ var log = require('./middleware/log');
 var partials = require('express-partials');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-
+var RedisStore = require('connect-redis')(session);
 
 
 app.set('view engine', 'ejs');
@@ -16,15 +16,15 @@ app.use(partials());
 app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
 app.use(cookieParser());
-app.use(session({secret:"secret"}));
 
-app.use(function(req,res,next){
-  if(req.session.pageCount)
-    req.session.pageCount++;
-  else
-    req.session.pageCount = 1;
-  next();
-});
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true,
+  store: new RedisStore(
+    {url: 'redis://redis',pass: process.env.REDIS_PASSWORD})
+  })
+);
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
