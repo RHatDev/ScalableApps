@@ -18,3 +18,13 @@ module.exports.requireAuthentication = function requireAuthentication(req, res, 
     res.redirect('/login');
   }
 };
+
+
+module.exports.auth = function auth(username, password, session){
+  var isAuth = username === 'joshua' || username === 'brian';
+  if (isAuth) {
+    session.isAuthenticated = isAuth;
+    session.user = {username: username};
+  }
+  return isAuth;
+};
