@@ -9,7 +9,7 @@ var redis = require('redis');
 
 //variable declarations
 var bodyParser = require('body-parser');
-Var csrf = require('csurf');
+var csrf = require('csurf');
 
 
 var session = require('express-session');
