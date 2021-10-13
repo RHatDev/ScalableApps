@@ -9,6 +9,7 @@ var redis = require('redis');
 
 //variable declarations
 var bodyParser = require('body-parser');
+Var csrf = require('csurf');
 
 
 var session = require('express-session');
@@ -33,9 +34,8 @@ redisClient.on('connect', function (err) {
 app.set('view engine', 'ejs');
 app.set('view options', {defaultLayout: 'layout'});
 
-//middleware stack right after session
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+
+
 
 app.use(partials());
 app.use(log.logger);
@@ -49,6 +49,10 @@ app.use(session({
   resave: true,
   store: new RedisStore({ client: redisClient })
   }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(csrf());
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
