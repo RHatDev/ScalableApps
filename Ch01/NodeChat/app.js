@@ -55,6 +55,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(csrf());
 app.use(util.csrf);
+app.use(util.authenticated);
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
