@@ -10,6 +10,7 @@ var redis = require('redis');
 //variable declarations
 var bodyParser = require('body-parser');
 var csrf = require('csurf');
+var util = require('./middleware/utilities');
 
 
 var session = require('express-session');
@@ -53,6 +54,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(csrf());
+app.use(util.csrf);
 
 app.get('/',routes.index);
 app.get('/login',routes.login);
