@@ -7,6 +7,10 @@ var partials = require('express-partials');
 var cookieParser = require('cookie-parser');
 var redis = require('redis');
 
+//variable declarations
+var bodyParser = require('body-parser');
+
+
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 
@@ -28,6 +32,10 @@ redisClient.on('connect', function (err) {
 
 app.set('view engine', 'ejs');
 app.set('view options', {defaultLayout: 'layout'});
+
+//middleware stack right after session
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(partials());
 app.use(log.logger);
